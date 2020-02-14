@@ -10,8 +10,6 @@ import Dashboard from "../pages/Dashboard";
 
 import Layout from "./layout/Primary";
 
-import "./App.css";
-
 const App: React.FunctionComponent = () => (
 	<Router>
 		<Layout>

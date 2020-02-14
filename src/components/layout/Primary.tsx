@@ -5,11 +5,13 @@ import "./Primary.css";
 
 const Primary: React.FunctionComponent = ({ children }) => (
 	<section className="Primary">
-		<nav>
-			<Link to="/dashboard">Home</Link>
+		<nav className="Primary-nav">
+			<Link className="Primary-link" to="/dashboard">
+				{"Home"}
+			</Link>
 		</nav>
 
-		<main>{children}</main>
+		<main className="Primary-main">{children}</main>
 	</section>
 );
 
