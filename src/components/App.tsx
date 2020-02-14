@@ -1,30 +1,31 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from "react-router-dom";
 
-import logo from "../logo.svg";
+import Dashboard from "../pages/Dashboard";
 
 import Layout from "./layout/Primary";
 
 import "./App.css";
 
-const App: React.FunctionComponent = () => {
-  return (
+const App: React.FunctionComponent = () => (
+  <Router>
     <Layout>
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        {"Edit "}
-        <code>src/App.tsx</code>
-        {" and save to reload."}
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {"Learn React"}
-      </a>
+      <Switch>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+
+        <Route path="/">
+          <Redirect to="/dashboard" />
+        </Route>
+      </Switch>
     </Layout>
-  );
-};
+  </Router>
+);
 
 export default App;
