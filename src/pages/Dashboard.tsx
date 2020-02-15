@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
 
+import IngredientInventory from "../components/IngredientInventory";
 import PendingOrderList from "../components/PendingOrderList";
 
 type IProps = {
@@ -23,7 +24,7 @@ const Dashboard: React.FunctionComponent<IProps> = ({ title }) => (
 			</Grid.Column>
 
 			<Grid.Column>
-				<PendingOrderList />
+				<IngredientInventory />
 			</Grid.Column>
 		</Grid.Row>
 	</Grid>
