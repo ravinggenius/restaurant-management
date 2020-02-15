@@ -1,18 +1,59 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Container, Menu } from "semantic-ui-react";
 
-import "./Primary.css";
+import RestaurantContext from "../../contexts/RestaurantContext";
 
-const Primary: React.FunctionComponent = ({ children }) => (
-	<section className="Primary">
-		<nav className="Primary-nav">
-			<Link className="Primary-link" to="/dashboard">
-				{"Home"}
-			</Link>
-		</nav>
+export const Primary: React.FunctionComponent = ({ children }) => {
+	const {
+		state: { orderCounts }
+	} = useContext(RestaurantContext);
 
-		<main className="Primary-main">{children}</main>
-	</section>
-);
+	return (
+		<Container>
+			<Menu>
+				<Menu.Item>
+					<Link to="/dashboard">Home</Link>
+				</Menu.Item>
+
+				<Menu.Item>
+					<Link to="/ingredients">Ingredients</Link>
+				</Menu.Item>
+
+				<Menu.Item>
+					<Link to="/recipes">Recipes</Link>
+				</Menu.Item>
+
+				<Menu.Item>
+					<Link to="/orders">Orders</Link>
+				</Menu.Item>
+			</Menu>
+
+			<Menu>
+				<Menu.Item>
+					{"pending orders: "}
+					{orderCounts.pending}
+				</Menu.Item>
+
+				<Menu.Item>
+					{"in-progress orders: "}
+					{orderCounts.progress}
+				</Menu.Item>
+
+				<Menu.Item>
+					{"cancelled orders: "}
+					{orderCounts.cancelled}
+				</Menu.Item>
+
+				<Menu.Item>
+					{"fulfilled orders: "}
+					{orderCounts.fulfilled}
+				</Menu.Item>
+			</Menu>
+
+			<main>{children}</main>
+		</Container>
+	);
+};
 
 export default Primary;
