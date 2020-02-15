@@ -4,17 +4,13 @@ import { Grid } from "semantic-ui-react";
 import IngredientInventory from "../components/IngredientInventory";
 import PendingOrderList from "../components/PendingOrderList";
 
-type IProps = {
-	title: string;
-};
-
 const P = "p";
 
-const Dashboard: React.FunctionComponent<IProps> = ({ title }) => (
+const Dashboard: React.FunctionComponent = () => (
 	<Grid>
 		<Grid.Row>
 			<Grid.Column>
-				<P>such {title}</P>
+				<P>such dashboard</P>
 			</Grid.Column>
 		</Grid.Row>
 

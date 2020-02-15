@@ -15,6 +15,9 @@ import RestaurantContext, {
 } from "../contexts/RestaurantContext";
 
 import Dashboard from "../pages/Dashboard";
+import IngredientsIndex from "../pages/IngredientsIndex";
+import OrdersIndex from "../pages/OrdersIndex";
+import RecipesIndex from "../pages/RecipesIndex";
 
 import * as Ingredient from "../services/Ingredient";
 import * as Order from "../services/Order";
@@ -57,19 +60,19 @@ const App: React.FunctionComponent = () => {
 				<Layout>
 					<Switch>
 						<Route path="/dashboard">
-							<Dashboard title="Dashboard" />
+							<Dashboard />
 						</Route>
 
 						<Route path="/ingredients">
-							<Dashboard title="Ingredients" />
+							<IngredientsIndex />
 						</Route>
 
 						<Route path="/recipes">
-							<Dashboard title="Recipes" />
+							<RecipesIndex />
 						</Route>
 
 						<Route path="/orders">
-							<Dashboard title="Orders" />
+							<OrdersIndex />
 						</Route>
 
 						<Route path="/">
