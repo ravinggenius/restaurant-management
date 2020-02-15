@@ -74,6 +74,9 @@ export const INITIAL_STATE: IAppState = {
 	}
 };
 
+const countOrdersByStatus = (orders: Array<IOrder>) => (status: IOrderStatus) =>
+	orders.filter(order => order.status === status).length;
+
 export const stateReducer = (
 	state: IAppState,
 	{ type, ...payload }: IAction
@@ -82,11 +85,21 @@ export const stateReducer = (
 		case "INIT_DATA":
 			const { ingredients, recipes, orders } = payload;
 
+			const countByStatus = countOrdersByStatus(orders);
+
+			const orderCounts = {
+				pending: countByStatus("PENDING"),
+				progress: countByStatus("PROGRESS"),
+				cancelled: countByStatus("CANCELLED"),
+				fulfilled: countByStatus("FULFILLED")
+			};
+
 			return {
 				...state,
 				ingredients,
 				recipes,
-				orders
+				orders,
+				orderCounts
 			};
 
 		default:
