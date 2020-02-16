@@ -7,7 +7,7 @@ type IRawIngredient = {
 	id: number;
 	name: string;
 	qty: string;
-	colors: Array<string>;
+	colors?: Array<string>;
 };
 
 export const list: () => Promise<Array<IIngredient>> = async () => {
@@ -17,7 +17,7 @@ export const list: () => Promise<Array<IIngredient>> = async () => {
 		const { itens: rawIngredients } = await response.json();
 
 		return rawIngredients.map(
-			({ id, name, qty, colors }: IRawIngredient) => ({
+			({ id, name, qty, colors = [] }: IRawIngredient) => ({
 				id,
 				name,
 				quantity: Number.parseInt(qty, 10),
