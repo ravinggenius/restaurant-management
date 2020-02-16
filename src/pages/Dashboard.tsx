@@ -1,29 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid } from "semantic-ui-react";
 
 import IngredientInventory from "../components/IngredientInventory";
 import PendingOrderList from "../components/PendingOrderList";
+import PageTitle from "../components/layout/PageTitle";
+import RestaurantContext from "../contexts/RestaurantContext";
 
-const P = "p";
+const Dashboard: React.FunctionComponent = () => {
+	const {
+		state: { ingredients, orders },
+		getRecipe
+	} = useContext(RestaurantContext);
 
-const Dashboard: React.FunctionComponent = () => (
-	<Grid>
-		<Grid.Row>
-			<Grid.Column>
-				<P>such dashboard</P>
-			</Grid.Column>
-		</Grid.Row>
+	return (
+		<Grid>
+			<Grid.Row>
+				<Grid.Column>
+					<PageTitle>Dashboard</PageTitle>
+				</Grid.Column>
+			</Grid.Row>
 
-		<Grid.Row columns={2}>
-			<Grid.Column>
-				<PendingOrderList />
-			</Grid.Column>
+			<Grid.Row columns={2}>
+				<Grid.Column>
+					<PendingOrderList {...{ getRecipe, orders }} />
+				</Grid.Column>
 
-			<Grid.Column>
-				<IngredientInventory />
-			</Grid.Column>
-		</Grid.Row>
-	</Grid>
-);
+				<Grid.Column>
+					<IngredientInventory {...{ ingredients }} />
+				</Grid.Column>
+			</Grid.Row>
+		</Grid>
+	);
+};
 
 export default Dashboard;
