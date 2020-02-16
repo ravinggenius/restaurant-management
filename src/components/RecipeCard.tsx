@@ -1,16 +1,22 @@
 import React from "react";
-import { Card, List } from "semantic-ui-react";
+import { Button, Card, List } from "semantic-ui-react";
 
 import { IIngredient, IRecipe } from "../contexts/RestaurantContext";
 
 type IProps = {
+	canOrder?: boolean;
 	getIngredient(ingredientId: number): IIngredient;
+	onCreateOrder(recipeId: number): void;
 	recipe: IRecipe;
 	usageCount: number;
 };
 
+const EM = "em";
+
 const RecipeCard: React.FunctionComponent<IProps> = ({
+	canOrder = false,
 	getIngredient,
+	onCreateOrder,
 	recipe,
 	usageCount
 }) => (
@@ -33,6 +39,17 @@ const RecipeCard: React.FunctionComponent<IProps> = ({
 						</List.Item>
 					))}
 				</List>
+
+				{canOrder ? (
+					<Button
+						onClick={() => onCreateOrder(recipe.id)}
+						type="button"
+					>
+						{"order"}
+					</Button>
+				) : (
+					<EM>not enough ingredients to order</EM>
+				)}
 			</Card.Description>
 		</Card.Content>
 

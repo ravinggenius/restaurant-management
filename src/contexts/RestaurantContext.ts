@@ -26,6 +26,8 @@ export const ORDER_STATUS = {
 	FULFILLED: "FULFILLED"
 };
 
+export const LOCK_PENDING_SECONDS = 60 * 3;
+
 export type IOrderStatus = "PENDING" | "PROGRESS" | "CANCELLED" | "FULFILLED";
 
 export type IOrder = {
@@ -49,7 +51,7 @@ export type IAppState = {
 	orderCounts: IOrderCounts;
 };
 
-export type IActionType = "INIT_DATA" | "ORDER_CANCEL";
+export type IActionType = "INIT_DATA" | "ORDER_CREATE" | "ORDER_CANCEL";
 
 export type IAction = {
 	type: IActionType;
@@ -100,6 +102,50 @@ export const stateReducer = (
 				recipes,
 				orders,
 				orderCounts
+			};
+
+		case "ORDER_CREATE":
+			const { recipeId } = payload;
+
+			const theRecipe = state.recipes.find(
+				recipe => recipe.id === recipeId
+			);
+
+			if (!theRecipe) {
+				return state;
+			}
+
+			return {
+				...state,
+				ingredients: state.ingredients.map(ingredient => {
+					const theRecipeIngredient = theRecipe.ingredients.find(
+						recipeIngredient =>
+							recipeIngredient.ingredientId === ingredient.id
+					);
+
+					if (theRecipeIngredient) {
+						return {
+							...ingredient,
+							quantity:
+								ingredient.quantity -
+								theRecipeIngredient.quantity
+						};
+					} else {
+						return ingredient;
+					}
+				}),
+				orders: state.orders.concat({
+					id: state.orders.length + 1,
+					status: "PENDING",
+					recipeId,
+					lockedAt: DateTime.utc().plus({
+						seconds: LOCK_PENDING_SECONDS
+					})
+				}),
+				orderCounts: {
+					...state.orderCounts,
+					pending: state.orderCounts.pending + 1
+				}
 			};
 
 		default:
