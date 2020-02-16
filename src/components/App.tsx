@@ -11,6 +11,7 @@ import "semantic-ui-css/semantic.min.css";
 import RestaurantContext, {
 	INITIAL_STATE,
 	stateReducer,
+	IIngredient,
 	IRecipe
 } from "../contexts/RestaurantContext";
 
@@ -45,12 +46,18 @@ const App: React.FunctionComponent = () => {
 		})();
 	}, []);
 
+	const getIngredient = (ingredientId: number) =>
+		state.ingredients.find(
+			(ingredient: IIngredient) => ingredient.id === ingredientId
+		);
+
 	const getRecipe = (recipeId: number) =>
 		state.recipes.find((recipe: IRecipe) => recipe.id === recipeId);
 
 	const value = {
 		dispatch,
 		state,
+		getIngredient,
 		getRecipe
 	};
 
