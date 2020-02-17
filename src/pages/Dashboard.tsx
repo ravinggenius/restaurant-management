@@ -4,6 +4,7 @@ import { Grid } from "semantic-ui-react";
 import IngredientInventory from "../components/IngredientInventory";
 import PendingOrderList from "../components/PendingOrderList";
 import PageTitle from "../components/layout/PageTitle";
+import Layout from "../components/layout/Primary";
 import RestaurantContext from "../contexts/RestaurantContext";
 
 const Dashboard: React.FunctionComponent = () => {
@@ -13,23 +14,25 @@ const Dashboard: React.FunctionComponent = () => {
 	} = useContext(RestaurantContext);
 
 	return (
-		<Grid>
-			<Grid.Row>
-				<Grid.Column>
-					<PageTitle>Dashboard</PageTitle>
-				</Grid.Column>
-			</Grid.Row>
+		<Layout>
+			<Grid>
+				<Grid.Row>
+					<Grid.Column>
+						<PageTitle>Dashboard</PageTitle>
+					</Grid.Column>
+				</Grid.Row>
 
-			<Grid.Row columns={2}>
-				<Grid.Column>
-					<PendingOrderList {...{ getRecipe, orders }} />
-				</Grid.Column>
+				<Grid.Row columns={2}>
+					<Grid.Column>
+						<PendingOrderList {...{ getRecipe, orders }} />
+					</Grid.Column>
 
-				<Grid.Column>
-					<IngredientInventory {...{ ingredients }} />
-				</Grid.Column>
-			</Grid.Row>
-		</Grid>
+					<Grid.Column>
+						<IngredientInventory {...{ ingredients }} />
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
+		</Layout>
 	);
 };
 

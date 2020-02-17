@@ -24,8 +24,6 @@ import * as Ingredient from "../services/Ingredient";
 import * as Order from "../services/Order";
 import * as Recipe from "../services/Recipe";
 
-import Layout from "./layout/Primary";
-
 const App: React.FunctionComponent = () => {
 	const [state, dispatch] = useReducer(stateReducer, INITIAL_STATE);
 
@@ -64,29 +62,27 @@ const App: React.FunctionComponent = () => {
 	return (
 		<RestaurantContext.Provider {...{ value }}>
 			<Router>
-				<Layout>
-					<Switch>
-						<Route path="/dashboard">
-							<Dashboard />
-						</Route>
+				<Switch>
+					<Route path="/dashboard">
+						<Dashboard />
+					</Route>
 
-						<Route path="/ingredients">
-							<IngredientsIndex />
-						</Route>
+					<Route path="/ingredients">
+						<IngredientsIndex />
+					</Route>
 
-						<Route path="/recipes">
-							<RecipesIndex />
-						</Route>
+					<Route path="/recipes">
+						<RecipesIndex />
+					</Route>
 
-						<Route path="/orders">
-							<OrdersIndex />
-						</Route>
+					<Route path="/orders">
+						<OrdersIndex />
+					</Route>
 
-						<Route path="/">
-							<Redirect to="/dashboard" />
-						</Route>
-					</Switch>
-				</Layout>
+					<Route path="/">
+						<Redirect to="/dashboard" />
+					</Route>
+				</Switch>
 			</Router>
 		</RestaurantContext.Provider>
 	);
