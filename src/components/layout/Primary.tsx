@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Container, Menu } from "semantic-ui-react";
+import { Container, Menu, Statistic } from "semantic-ui-react";
 
 import RestaurantContext from "../../contexts/RestaurantContext";
 
@@ -29,27 +29,21 @@ export const Primary: React.FunctionComponent = ({ children }) => {
 				</Menu.Item>
 			</Menu>
 
-			<Menu>
-				<Menu.Item>
-					{"pending orders: "}
-					{orderCounts.pending}
-				</Menu.Item>
-
-				<Menu.Item>
-					{"in-progress orders: "}
-					{orderCounts.progress}
-				</Menu.Item>
-
-				<Menu.Item>
-					{"cancelled orders: "}
-					{orderCounts.cancelled}
-				</Menu.Item>
-
-				<Menu.Item>
-					{"fulfilled orders: "}
-					{orderCounts.fulfilled}
-				</Menu.Item>
-			</Menu>
+			<Statistic.Group>
+				<Statistic label="pending orders" value={orderCounts.pending} />
+				<Statistic
+					label="in-progress orders"
+					value={orderCounts.progress}
+				/>
+				<Statistic
+					label="cancelled orders"
+					value={orderCounts.cancelled}
+				/>
+				<Statistic
+					label="fullfilled orders"
+					value={orderCounts.fulfilled}
+				/>
+			</Statistic.Group>
 
 			<main>{children}</main>
 		</Container>
