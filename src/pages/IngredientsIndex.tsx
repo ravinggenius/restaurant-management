@@ -13,6 +13,11 @@ const IngredientsIndex: React.FunctionComponent = () => {
 		state: { ingredients }
 	} = useContext(RestaurantContext);
 
+	const ingredientColors = ingredients
+		.reduce<Array<string>>((memo, { colors }) => memo.concat(colors), [])
+		.filter((c, index, colors) => colors.indexOf(c) === index)
+		.sort();
+
 	const [color, setColor] = useState("");
 
 	const filteredIngredients = ingredients.filter(
@@ -37,6 +42,7 @@ const IngredientsIndex: React.FunctionComponent = () => {
 								icon="search"
 								id="color-filter"
 								label="filter by color"
+								list="color-filter-options"
 								name="color"
 								onChange={({ target: { value } }) =>
 									setColor(value.toLowerCase())
@@ -45,6 +51,11 @@ const IngredientsIndex: React.FunctionComponent = () => {
 								type="search"
 								value={color}
 							/>
+							<datalist id="color-filter-options">
+								{ingredientColors.map(color => (
+									<option key={color} value={color} />
+								))}
+							</datalist>
 						</Form>
 					</Grid.Column>
 				</Grid.Row>

@@ -21,7 +21,7 @@ export const list: () => Promise<Array<IIngredient>> = async () => {
 				id,
 				name,
 				quantity: Number.parseInt(qty, 10),
-				colors
+				colors: colors.map(color => color.toLowerCase())
 			})
 		);
 	} else {
