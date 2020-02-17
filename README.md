@@ -21,7 +21,7 @@ Project is built with TypeScript. Use `npm run build` to produce a production bu
 ### Requirements, Soft
 
 - [x] use typescript
-- [ ] filter ingredients by color
+- [x] filter ingredients by color
 - [x] orders are created in pending state
 - [ ] after 3 minutes order automatically transitions to in progress. maybe show time remaining with progress bar
 - [ ] allow order to be cancelled while in pending state
