@@ -1,3 +1,33 @@
+## Local Setup
+
+1. Clone project and change directories.
+2. Install dependencies: `npm install`.
+3. Start local development server: `npm run start`.
+
+Project is built with TypeScript. Use `npm run build` to produce a production build and ship `./build` off to a static host.
+
+## Challenge
+
+### Requirements, Hard
+
+- [x] track ingredients left in stock after each order
+- [x] track recipe order count
+- [x] use react
+- [x] single screen showing pending orders and ingredients inventory
+- [x] top bar with order counts by status
+- [x] disallow order creation if not enough ingredients
+- [x] use api documented at https://app.swaggerhub.com/apis/d65yan/restaurant/0.0.0
+
+### Requirements, Soft
+
+- [x] use typescript
+- [ ] filter ingredients by color
+- [x] orders are created in pending state
+- [ ] after 3 minutes order automatically transitions to in progress. maybe show time remaining with progress bar
+- [ ] allow order to be cancelled while in pending state
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
