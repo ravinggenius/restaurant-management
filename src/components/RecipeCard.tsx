@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, List } from "semantic-ui-react";
 
-import { IIngredient, IRecipe } from "../contexts/RestaurantContext";
+import { IIngredient, IRecipe } from "../types/index";
 
 type IProps = {
 	canOrder?: boolean;

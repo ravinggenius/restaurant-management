@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Header, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-import { IIngredient } from "../contexts/RestaurantContext";
+import { IIngredient } from "../types/index";
 
 const P = "p";
 

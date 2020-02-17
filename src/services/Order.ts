@@ -1,6 +1,8 @@
 import { DateTime } from "luxon";
 
-import { IOrder, LOCK_PENDING_SECONDS } from "../contexts/RestaurantContext";
+import { LOCK_PENDING_SECONDS } from "../constants";
+
+import { IOrder } from "../types/index";
 
 import { METHODS, fetchApi } from "./API";
 import NetworkError from "./NetworkError";

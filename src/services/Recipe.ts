@@ -1,4 +1,4 @@
-import { IRecipe } from "../contexts/RestaurantContext";
+import { IRecipe } from "../types/index";
 
 import { METHODS, fetchApi } from "./API";
 import NetworkError from "./NetworkError";

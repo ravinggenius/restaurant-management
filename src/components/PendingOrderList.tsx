@@ -2,7 +2,9 @@ import React from "react";
 import { Container, Header, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-import { IRecipe, IOrder, ORDER_STATUS } from "../contexts/RestaurantContext";
+import { ORDER_STATUS } from "../constants";
+
+import { IRecipe, IOrder } from "../types/index";
 
 const P = "p";
 

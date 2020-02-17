@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, List } from "semantic-ui-react";
 
-import { IIngredient } from "../contexts/RestaurantContext";
+import { IIngredient } from "../types/index";
 
 type IProps = {
 	ingredient: IIngredient;
