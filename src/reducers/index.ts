@@ -29,6 +29,14 @@ const stateReducer = (state: IAppState, { type, ...payload }: IAction) => {
 				orderCounts
 			};
 
+		case "INGREDIENT_ADD":
+			const { ingredient } = payload;
+
+			return {
+				...state,
+				ingredients: state.ingredients.concat(ingredient)
+			};
+
 		case "ORDER_CREATE":
 			const { recipeId } = payload;
 

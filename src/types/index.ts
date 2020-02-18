@@ -1,10 +1,13 @@
 import { DateTime } from "luxon";
 
-export type IIngredient = {
-	id: number;
+export type IIngredientAttrs = {
 	name: string;
 	quantity: number;
 	colors: Array<string>;
+};
+
+export type IIngredient = IIngredientAttrs & {
+	id: number;
 };
 
 export type IRecipeIngredient = {
@@ -41,7 +44,11 @@ export type IAppState = {
 	orderCounts: IOrderCounts;
 };
 
-export type IActionType = "INIT_DATA" | "ORDER_CREATE" | "ORDER_CANCEL";
+export type IActionType =
+	| "INIT_DATA"
+	| "INGREDIENT_ADD"
+	| "ORDER_CREATE"
+	| "ORDER_CANCEL";
 
 export type IAction = {
 	type: IActionType;
