@@ -1,7 +1,15 @@
 import { Formik, Field, FieldArray, FormikHelpers } from "formik";
-import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
-import { Button, Form, Grid, Label, List, Segment } from "semantic-ui-react";
+import React, { useContext, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import {
+	Button,
+	Confirm,
+	Form,
+	Grid,
+	Label,
+	List,
+	Segment
+} from "semantic-ui-react";
 
 import PageTitle from "../components/layout/PageTitle";
 import Layout from "../components/layout/Primary";
@@ -13,8 +21,12 @@ import { IIngredient } from "../types";
 const IngredientsShow: React.FunctionComponent = () => {
 	const {
 		dispatch,
-		state: { ingredients }
+		state: { ingredients, recipes }
 	} = useContext(RestaurantContext);
+
+	const history = useHistory();
+
+	const [showConfirm, setShowConfirm] = useState(false);
 
 	const { ingredientId: iId } = useParams();
 
@@ -52,6 +64,23 @@ const IngredientsShow: React.FunctionComponent = () => {
 		}
 
 		setSubmitting(false);
+	};
+
+	const ingredientIsUsed = recipes.some(recipe =>
+		recipe.ingredients.find(ing => ing.ingredientId === ingredientId)
+	);
+
+	const handleDelete = async () => {
+		await Ingredient.remove(ingredientId);
+
+		dispatch({
+			type: "INGREDIENT_REMOVE",
+			ingredientId
+		});
+
+		setShowConfirm(false);
+
+		history.goBack();
 	};
 
 	return (
@@ -198,6 +227,25 @@ const IngredientsShow: React.FunctionComponent = () => {
 								</Form>
 							)}
 						</Formik>
+					</Grid.Column>
+				</Grid.Row>
+
+				<Grid.Row>
+					<Grid.Column>
+						<Button
+							content="Delete"
+							disabled={ingredientIsUsed}
+							icon="warning"
+							labelPosition="left"
+							onClick={() => setShowConfirm(true)}
+							type="button"
+						/>
+
+						<Confirm
+							onCancel={() => setShowConfirm(false)}
+							onConfirm={handleDelete}
+							open={showConfirm}
+						/>
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>

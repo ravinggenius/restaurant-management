@@ -49,6 +49,16 @@ const stateReducer = (state: IAppState, { type, ...payload }: IAction) => {
 				)
 			};
 
+		case "INGREDIENT_REMOVE":
+			const { ingredientId } = payload;
+
+			return {
+				...state,
+				ingredients: state.ingredients.filter(
+					ingredient => ingredient.id !== ingredientId
+				)
+			};
+
 		case "ORDER_CREATE":
 			const { recipeId } = payload;
 

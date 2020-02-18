@@ -104,3 +104,22 @@ export const update: (
 		);
 	}
 };
+
+export const remove: (ingredientId: number) => Promise<void> = async (
+	ingredientId: number
+) => {
+	const response = await fetchApi(METHODS.DELETE, "/items", {
+		body: JSON.stringify({
+			ingredientId
+		})
+	});
+
+	if (response.ok) {
+		return;
+	} else {
+		throw new NetworkError(
+			"Unable to delete ingredient. Are you sure it isn't used in a recipe?",
+			response
+		);
+	}
+};
