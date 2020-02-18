@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { Card, Grid } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { Button, Card, Grid } from "semantic-ui-react";
 
 import PageTitle from "../components/layout/PageTitle";
 import Layout from "../components/layout/Primary";
@@ -26,7 +27,19 @@ const RecipesIndex: React.FunctionComponent = () => {
 				<Grid.Row>
 					<Grid.Column>
 						<PageTitle>Recipes</PageTitle>
+					</Grid.Column>
+				</Grid.Row>
 
+				<Grid.Row>
+					<Grid.Column>
+						<Button as={Link} to="/recipes/new">
+							{"New"}
+						</Button>
+					</Grid.Column>
+				</Grid.Row>
+
+				<Grid.Row>
+					<Grid.Column>
 						<Card.Group>
 							{recipes.map(recipe => (
 								<RecipeCard

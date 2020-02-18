@@ -14,6 +14,7 @@ import IngredientsNew from "../pages/IngredientsNew";
 import IngredientsShow from "../pages/IngredientsShow";
 import OrdersIndex from "../pages/OrdersIndex";
 import RecipesIndex from "../pages/RecipesIndex";
+import RecipesNew from "../pages/RecipesNew";
 
 import AppStateProvider from "../providers/AppStateProvider";
 
@@ -35,6 +36,10 @@ const App: React.FunctionComponent = () => (
 
 				<Route path="/ingredients">
 					<IngredientsIndex />
+				</Route>
+
+				<Route path="/recipes/new">
+					<RecipesNew />
 				</Route>
 
 				<Route path="/recipes">

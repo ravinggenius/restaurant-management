@@ -93,6 +93,14 @@ const stateReducer = (state: IAppState, { type, ...payload }: IAction) => {
 				}
 			};
 
+		case "RECIPE_ADD":
+			const { recipe: newRecipe } = payload;
+
+			return {
+				...state,
+				recipes: state.recipes.concat(newRecipe)
+			};
+
 		default:
 			return state;
 	}

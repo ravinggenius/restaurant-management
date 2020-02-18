@@ -15,10 +15,13 @@ export type IRecipeIngredient = {
 	quantity: number;
 };
 
-export type IRecipe = {
-	id: number;
+export type IRecipeAttrs = {
 	name: string;
 	ingredients: Array<IRecipeIngredient>;
+};
+
+export type IRecipe = IRecipeAttrs & {
+	id: number;
 };
 
 export type IOrderStatus = "PENDING" | "PROGRESS" | "CANCELLED" | "FULFILLED";
@@ -49,7 +52,8 @@ export type IActionType =
 	| "INGREDIENT_ADD"
 	| "INGREDIENT_UPDATE"
 	| "ORDER_CREATE"
-	| "ORDER_CANCEL";
+	| "ORDER_CANCEL"
+	| "RECIPE_ADD";
 
 export type IAction = {
 	type: IActionType;
