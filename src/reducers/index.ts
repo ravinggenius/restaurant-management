@@ -30,11 +30,23 @@ const stateReducer = (state: IAppState, { type, ...payload }: IAction) => {
 			};
 
 		case "INGREDIENT_ADD":
-			const { ingredient } = payload;
+			const { ingredient: newIngredient } = payload;
 
 			return {
 				...state,
-				ingredients: state.ingredients.concat(ingredient)
+				ingredients: state.ingredients.concat(newIngredient)
+			};
+
+		case "INGREDIENT_UPDATE":
+			const { ingredient: updatedIngredient } = payload;
+
+			return {
+				...state,
+				ingredients: state.ingredients.map(ingredient =>
+					ingredient.id === updatedIngredient.id
+						? updatedIngredient
+						: ingredient
+				)
 			};
 
 		case "ORDER_CREATE":

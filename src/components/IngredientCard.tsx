@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card, List } from "semantic-ui-react";
 
 import { IIngredient } from "../types/index";
@@ -10,7 +11,7 @@ type IProps = {
 const EM = "em";
 
 const IngredientCard: React.FunctionComponent<IProps> = ({ ingredient }) => (
-	<Card>
+	<Card as={Link} to={`/ingredients/${ingredient.id}`}>
 		<Card.Content>
 			<Card.Header>{ingredient.name}</Card.Header>
 

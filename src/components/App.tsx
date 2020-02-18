@@ -11,6 +11,7 @@ import "semantic-ui-css/semantic.min.css";
 import Dashboard from "../pages/Dashboard";
 import IngredientsIndex from "../pages/IngredientsIndex";
 import IngredientsNew from "../pages/IngredientsNew";
+import IngredientsShow from "../pages/IngredientsShow";
 import OrdersIndex from "../pages/OrdersIndex";
 import RecipesIndex from "../pages/RecipesIndex";
 
@@ -26,6 +27,10 @@ const App: React.FunctionComponent = () => (
 
 				<Route path="/ingredients/new">
 					<IngredientsNew />
+				</Route>
+
+				<Route path="/ingredients/:ingredientId">
+					<IngredientsShow />
 				</Route>
 
 				<Route path="/ingredients">

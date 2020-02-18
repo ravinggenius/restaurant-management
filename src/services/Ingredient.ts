@@ -76,3 +76,31 @@ export const create: (
 		);
 	}
 };
+
+export const update: (
+	ingredientId: number,
+	ingredient: IIngredient
+) => Promise<IIngredient> = async (
+	ingredientId: number,
+	ingredient: IIngredient
+) => {
+	const errors = validate(ingredient);
+
+	if (errors) {
+		throw errors;
+	}
+
+	const response = await fetchApi(METHODS.PUT, "/items");
+
+	if (response.ok) {
+		return {
+			...ingredient,
+			id: ingredientId
+		};
+	} else {
+		throw new NetworkError(
+			"Unable to update ingredient. Please check the form and try again.",
+			response
+		);
+	}
+};

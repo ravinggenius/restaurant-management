@@ -47,6 +47,7 @@ export type IAppState = {
 export type IActionType =
 	| "INIT_DATA"
 	| "INGREDIENT_ADD"
+	| "INGREDIENT_UPDATE"
 	| "ORDER_CREATE"
 	| "ORDER_CANCEL";
 
