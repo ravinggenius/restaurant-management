@@ -32,3 +32,22 @@ export const list: () => Promise<Array<IOrder>> = async () => {
 		throw new NetworkError("Unable to list orders", response);
 	}
 };
+
+export const update: (
+	orderId: number,
+	order: IOrder
+) => Promise<IOrder> = async (orderId: number, order: IOrder) => {
+	const response = await fetchApi(METHODS.PUT, "/orders");
+
+	if (response.ok) {
+		return {
+			...order,
+			id: orderId
+		};
+	} else {
+		throw new NetworkError(
+			"Unable to update order. Please check the status and try again.",
+			response
+		);
+	}
+};

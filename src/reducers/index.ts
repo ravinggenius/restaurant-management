@@ -7,26 +7,28 @@ import { IAction, IAppState, IOrder, IOrderStatus } from "../types/index";
 const countOrdersByStatus = (orders: Array<IOrder>) => (status: IOrderStatus) =>
 	orders.filter(order => order.status === status).length;
 
+const calculateOrderCounts = (orders: Array<IOrder>) => {
+	const countByStatus = countOrdersByStatus(orders);
+
+	return {
+		pending: countByStatus("PENDING"),
+		progress: countByStatus("PROGRESS"),
+		cancelled: countByStatus("CANCELLED"),
+		fulfilled: countByStatus("FULFILLED")
+	};
+};
+
 const stateReducer = (state: IAppState, { type, ...payload }: IAction) => {
 	switch (type) {
 		case "INIT_DATA":
 			const { ingredients, recipes, orders } = payload;
-
-			const countByStatus = countOrdersByStatus(orders);
-
-			const orderCounts = {
-				pending: countByStatus("PENDING"),
-				progress: countByStatus("PROGRESS"),
-				cancelled: countByStatus("CANCELLED"),
-				fulfilled: countByStatus("FULFILLED")
-			};
 
 			return {
 				...state,
 				ingredients,
 				recipes,
 				orders,
-				orderCounts
+				orderCounts: calculateOrderCounts(orders)
 			};
 
 		case "INGREDIENT_ADD":
@@ -101,6 +103,60 @@ const stateReducer = (state: IAppState, { type, ...payload }: IAction) => {
 					...state.orderCounts,
 					pending: state.orderCounts.pending + 1
 				}
+			};
+
+		case "ORDER_STATUS_PROGRESS":
+			const { orderId: progressOrderId } = payload;
+
+			const progressOrders: Array<IOrder> = state.orders.map(order =>
+				order.id === progressOrderId
+					? {
+							...order,
+							status: "PROGRESS"
+					  }
+					: order
+			);
+
+			return {
+				...state,
+				orders: progressOrders,
+				orderCounts: calculateOrderCounts(progressOrders)
+			};
+
+		case "ORDER_STATUS_CANCELLED":
+			const { orderId: cancelOrderId } = payload;
+
+			const cancelOrders: Array<IOrder> = state.orders.map(order =>
+				order.id === cancelOrderId
+					? {
+							...order,
+							status: "CANCELLED"
+					  }
+					: order
+			);
+
+			return {
+				...state,
+				orders: cancelOrders,
+				orderCounts: calculateOrderCounts(cancelOrders)
+			};
+
+		case "ORDER_STATUS_FULFILLED":
+			const { orderId: fulfillOrderId } = payload;
+
+			const fulfillOrders: Array<IOrder> = state.orders.map(order =>
+				order.id === fulfillOrderId
+					? {
+							...order,
+							status: "FULFILLED"
+					  }
+					: order
+			);
+
+			return {
+				...state,
+				orders: fulfillOrders,
+				orderCounts: calculateOrderCounts(fulfillOrders)
 			};
 
 		case "RECIPE_ADD":
