@@ -14,12 +14,10 @@ const RecipesIndex: React.FunctionComponent = () => {
 	} = useContext(RestaurantContext);
 
 	const handleCreateOrder = (recipeId: number) => {
-		if (dispatch) {
-			dispatch({
-				type: "ORDER_CREATE",
-				recipeId
-			});
-		}
+		dispatch({
+			type: "ORDER_CREATE",
+			recipeId
+		});
 	};
 
 	return (

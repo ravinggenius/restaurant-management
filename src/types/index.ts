@@ -49,7 +49,7 @@ export type IAction = {
 };
 
 export type IAppContextState = {
-	dispatch?(action: IAction): void;
+	dispatch(action: IAction): void;
 	state: IAppState;
 	[key: string]: any;
 };
